@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+          type="text/css">
+    <link rel="stylesheet" href="../static/theme.css" type="text/css">
+    <link rel="stylesheet" href="../static/animate.css" type="text/css">
+    <title>Ethically Fit</title>
+</head>
+
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="/">Home</a>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item ">
+        <a class="nav-link disabled text-white">Analysis: </a>
+      </li>
+     <li class="nav-item ">
+        <a class="nav-link disabled text-white">{{ out[0][0]}} : {{ out[0][1] }}% </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled text-white">{{ out[1][0]}} : {{ out[1][1] }}% </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled text-white">{{ out[2][0]}} : {{ out[2][1] }}% </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled text-white">{{ out[3][0]}} : {{ out[3][1] }}% </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled text-white">{{ out[4][0]}} : {{ out[4][1] }}% </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+{#<div style="position:absolute;top:0;right:0;" id="curmaj">Selected major is{{ maj }}</div>#}
+<div class="text-center d-flex cover"
+     style="background-image: url('../static/bg5.jpg'); background-size:cover; background-position: left top;">
+    <div class="container py-5 ml-auto">
+        <div class="row animated fadeInUp" style="-webkit-animation-duration: 1.5s">
+            <div class="col-md-12">
+                <h3 class="display-4 mb-4 text-white">
+                    <b>Scenario {{ num + 1}}</b>
+                </h3>
+                <p class="lead mb-5" style="background-color: #0f988d; color: #0b0b0b">
+                    <b class="text-white">{{ scenario }}</b>
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+            </div>
+            <a id="ethical" class="btn btn-lg btn-primary mx-1 col-md-2 animated slideInLeft" style="padding-left:20px;padding-right:20px;-webkit-animation-duration:1.5s">Ethical</a>
+            <a id="unethical" class="btn btn-lg btn-primary mx-1 col-md-2 animated slideInRight" style="-webkit-animation-duration:1.5s">Unethical</a>
+        </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+<script>
+    document.getElementById("ethical").addEventListener("click",function(){
+        req(1);
+        console.log("in 1")
+    });
+    document.getElementById("unethical").addEventListener("click",function(){
+        console.log("in 2")
+        req(2)
+    });
+
+    function req(answer) {
+        var xhr = new XMLHttpRequest();
+        var major = {{ maj|tojson }};
+        var num = {{ num|tojson }};
+        console.log(major.toString());
+        var params = "major=" + major.toString() + "&num="+num.toString()+"&ans="+answer.toString();
+        var path = "/survey/?params=" + params;
+{#        xhr.open('GET', path, false);#}
+{#        xhr.send();#}
+        window.location.href = path;
+        return xhr.responseText;
+    }
+</script>
+</body>
+
+</html>
