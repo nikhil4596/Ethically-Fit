@@ -1,9 +1,9 @@
 from flask import Flask, render_template, request
 import numpy as np
 
-outfile = "C:\\Users\\nikhil\Desktop\LMC\static\\file.npz"
-#file = np.load(outfile)
-#answers = file["data"].item()
+outfile = "C:\\Users\\nikhil\\Desktop\LMC\static\\file.npz"
+file = np.load(outfile)
+answers = file["data"].item()
 # majors = set([m.decode('UTF-8') for m in ms])
 scenarios = [
     "Tim is a doctor at a top hospital. Tim has six gravely ill patients, five of whom are in urgent need of organ transplants. Tim can't help them, though, because there are no available organs that can be used to save their lives. The sixth patient, however, will die without a particular medicine. If s/he dies, Tim will be able to save the other five patients by using the organs of patient 6, who is an organ donor. Tim decides to cure the 6th ailing person by giving her/him the required medicine but in the process the rest 5 die due to lack of organs. Was Tim decision ethical?",
@@ -14,21 +14,21 @@ scenarios = [
     "Tom is part of a group of ecologists who live in a remote stretch of jungle. The entire group, which includes eight children, has been taken hostage by a group of paramilitary terrorists. One of the terrorists takes a liking to Tom. He informs Tom that his leader intends to kill him and the rest of the hostages the following morning. He is willing to help Tom and the children escape, but as an act of good faith he wants Tom to torture and kill one of his fellow hostages whom he does not like. If Tom refuses his offer, all the hostages including the children and Tom will die. If he accepts his offer, then the others will die in the morning but Tom and the eight children will escape. Tom decided to not to use power to torture and rejected his offer and thus, was responsible for deaths of everyone including his own. Was Tom ethical in his decision",
     "Austin is a single father of three young girls, He has always been the cool dad but lately all his kids have been acting a bit strange. He isn't sure if his daughters are involved with some bad substances or if it is the teenage that is making them like this. He has been getting very worried about this and thus troubled, he decides to snoop around and check one of his daughter's laptop. He searches around a bit but doesn't find any proof that she is troubled. He didnt find anything to validate his doubts but came across some very private though unrelated conversation of his daughter with her friend that she  would never have shared with anyone else. Was Austin ethical in his decision to confirm his doubts and caring for his children?"]
 
-answers = {
-    'Computer Sci': [{'e': 18, 'u': 12}, {'e': 11, 'u': 19}, {'e': 4, 'u': 26}, {'e': 20, 'u': 10}, {'e': 0, 'u': 30},
-                     {'e': 10, 'u': 20}, {'e': 25, 'u': 15}],
-    'Life Sciences': [{'e': 12, 'u': 18}, {'e': 4, 'u': 26}, {'e': 0, 'u': 30}, {'e': 10, 'u': 20}, {'e': 0, 'u': 30},
-                      {'e': 20, 'u': 10}, {'e': 13, 'u': 17}],
-    'Advertisement': [{'e': 3, 'u': 1}, {'e': 1, 'u': 3}, {'e': 2, 'u': 2}, {'e': 3, 'u': 1}, {'e': 0, 'u': 4},
-                      {'e': 3, 'u': 1}, {'e': 1, 'u': 3}],
-    'Mechanical': [{'e': 13, 'u': 27}, {'e': 10, 'u': 30}, {'e': 20, 'u': 20}, {'e': 15, 'u': 25}, {'e': 10, 'u': 30},
-                   {'e': 19, 'u': 21}, {'e': 22, 'u': 18}],
-    'Law': [{'e': 5, 'u': 5}, {'e': 9, 'u': 1}, {'e': 7, 'u': 3}, {'e': 6, 'u': 4}, {'e': 5, 'u': 5}, {'e': 2, 'u': 8},
-            {'e': 6, 'u': 4}],
-    'Entertainment': [{'e': 4, 'u': 0}, {'e': 3, 'u': 1}, {'e': 2, 'u': 2}, {'e': 4, 'u': 0}, {'e': 3, 'u': 1},
-                      {'e': 1, 'u': 3}, {'e': 2, 'u': 2}],
-    'Business': [{'e': 20, 'u': 5}, {'e': 15, 'u': 10}, {'e': 10, 'u': 15}, {'e': 8, 'u': 17}, {'e': 16, 'u': 9},
-                 {'e': 20, 'u': 5}, {'e': 14, 'u': 11}]}
+#answers = {
+#    'Computer Sci': [{'e': 18, 'u': 12}, {'e': 11, 'u': 19}, {'e': 4, 'u': 26}, {'e': 20, 'u': 10}, {'e': 0, 'u': 30},
+#                     {'e': 10, 'u': 20}, {'e': 25, 'u': 15}],
+#    'Life Sciences': [{'e': 12, 'u': 18}, {'e': 4, 'u': 26}, {'e': 0, 'u': 30}, {'e': 10, 'u': 20}, {'e': 0, 'u': 30},
+#                      {'e': 20, 'u': 10}, {'e': 13, 'u': 17}],
+#    'Advertisement': [{'e': 3, 'u': 1}, {'e': 1, 'u': 3}, {'e': 2, 'u': 2}, {'e': 3, 'u': 1}, {'e': 0, 'u': 4},
+#                      {'e': 3, 'u': 1}, {'e': 1, 'u': 3}],
+#    'Mechanical': [{'e': 13, 'u': 27}, {'e': 10, 'u': 30}, {'e': 20, 'u': 20}, {'e': 15, 'u': 25}, {'e': 10, 'u': 30},
+#                   {'e': 19, 'u': 21}, {'e': 22, 'u': 18}],
+#    'Law': [{'e': 5, 'u': 5}, {'e': 9, 'u': 1}, {'e': 7, 'u': 3}, {'e': 6, 'u': 4}, {'e': 5, 'u': 5}, {'e': 2, 'u': 8},
+#            {'e': 6, 'u': 4}],
+#    'Entertainment': [{'e': 4, 'u': 0}, {'e': 3, 'u': 1}, {'e': 2, 'u': 2}, {'e': 4, 'u': 0}, {'e': 3, 'u': 1},
+#                      {'e': 1, 'u': 3}, {'e': 2, 'u': 2}],
+#    'Business': [{'e': 20, 'u': 5}, {'e': 15, 'u': 10}, {'e': 10, 'u': 15}, {'e': 8, 'u': 17}, {'e': 16, 'u': 9},
+#                 {'e': 20, 'u': 5}, {'e': 14, 'u': 11}]}
 
 majors = set(answers.keys())
 
@@ -53,10 +53,14 @@ def score(ans, num):
     res = []
     for mj in majors:
         if total_responses[mj][num] != 0:
-            val = answers[mj][num][ans] / total_responses[mj][num] * 100
+            val = answers[mj][num][ans]*1.0 / total_responses[mj][num] * 100
+        if num > 1:
+            val +=  answers[mj][num-1][ans]*1.0 / total_responses[mj][num-1] * 100
+            val = val/2
             res.append((mj, round(float(val), 2)))
     res.sort(key=lambda x: x[1])
     res.reverse()
+    print ("RES", res)
     return res
 
 
